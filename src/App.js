@@ -1,24 +1,48 @@
-import logo from './logo.svg';
+import Header from './component/Header'
+import AddNote from './component/AddNote'
+import TodoItem from './component/TodoItem'
 import './App.css';
+import React, { useEffect, useState } from 'react';
+
 
 function App() {
+
+  const onDelete=(todo)=>{
+    setTodos(todos.filter( e=>{
+      return e!==todo;
+    }))
+  }
+
+  const addTodo=(title,desc)=>{
+    let sno=todos.at(-1)?todos.at(-1).sno+1:1;
+
+    let newTodo={
+      sno,
+      title,
+      desc,
+      completed:false
+    }
+    setTodos([...todos,newTodo]);
+  }
+  
+  let initialize=[];
+
+  if(localStorage['todos']!==undefined){
+    initialize=JSON.parse(localStorage['todos']);
+  }
+  const [todos, setTodos] = useState(initialize);
+
+  useEffect(()=>{
+    localStorage.setItem('todos',JSON.stringify(todos));
+  },[todos])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header/>
+    <AddNote addTodo={addTodo}/>
+    <TodoItem todos={todos} onDelete={onDelete}/>
+    </>
   );
 }
 
