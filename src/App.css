@@ -4,6 +4,8 @@
 body{
     font-family: 'Poppins', sans-serif;
     padding: 20px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
 }
 
 header{
@@ -20,7 +22,15 @@ header>span:nth-child(2){
 form{
     margin-top: 5px;
 }
-
+svg.noteAdd:hover{
+    color: rgb(28, 63, 219) !important; 
+}
+svg.noteDelete:hover{
+    color: red;
+}
+svg:active{
+    transform: scale(1.1);
+}
 .todoItem{
     font-size: 25px;
     padding-left: 10px;
@@ -29,6 +39,17 @@ form{
 .todo{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.todo>div{
+    flex: auto;
+}
+.todo>span{
+    align-self: flex-start;
+}
+.todo>*{
+    margin: auto 5px;
 }
 .todo>div>h2{
     margin: 0px;
@@ -38,5 +59,5 @@ form{
     font-size: 20px;
 }
 .todo:nth-child(even){
-    background-color: lightgrey;
+    background-color: #2d2d2d1c;
 }

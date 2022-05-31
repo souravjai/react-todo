@@ -25,6 +25,15 @@ function App() {
     setTodos([...todos,newTodo]);
   }
   
+  const onCompleted=(todo)=>{
+    setTodos(todos.map(e=>{
+      if(e===todo){
+        e.completed=!e.completed;
+      }
+      return e;
+    }))
+  }
+
   let initialize=[];
 
   if(localStorage['todos']!==undefined){
@@ -41,7 +50,7 @@ function App() {
     <>
     <Header/>
     <AddNote addTodo={addTodo}/>
-    <TodoItem todos={todos} onDelete={onDelete}/>
+    <TodoItem todos={todos} onDelete={onDelete} onCompleted={onCompleted}/>
     </>
   );
 }

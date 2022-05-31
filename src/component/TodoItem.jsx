@@ -10,7 +10,8 @@ export default function TodoItem(props) {
                 todo =>{ return (
                     <Todo key={todo.sno} className="todo"
                     todo={todo} 
-                    onDelete={()=>{props.onDelete(todo)}}/> );
+                    onDelete={()=>props.onDelete(todo)}
+                    onCompleted={()=>props.onCompleted(todo)}/> );
                     })
             }
         </div>

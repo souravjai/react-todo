@@ -1,5 +1,6 @@
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import {FiPlus} from 'react-icons/fi';
 
 export default function AddNote({addTodo}) {
     const [title,setTitle]=useState("");
@@ -21,7 +22,7 @@ export default function AddNote({addTodo}) {
     }
 
     return (
-        <form onSubmit={submit} style={{padding:"10px",margin:"10px"}}>
+        <form onSubmit={submit} style={{padding:"10px",margin:"10px 110px"}}>
             <TextField id="standard-basic" 
                 label={titleError?"Please add a title":"Add a title"}
                 variant="standard" 
@@ -38,7 +39,9 @@ export default function AddNote({addTodo}) {
                 onChange={(e)=>{setdescError(false); setDesc(e.target.value)}} error={descError}
                 autoComplete="off"/>
 
-            <button type="submit">Add Note</button>               
+                <FiPlus className="noteAdd" style={{cursor: "pointer" , padding:"12px 10px",color:"rebeccapurple"}} type="submit" size={40} onClick={submit}/>
+
+            <button type="submit" style={{display:"none"}}/>
         </form>
     )
 }
