@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
 
 body{
@@ -11,6 +11,7 @@ body{
 header{
     font-size: 35px;
     margin: 15px 5px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
@@ -25,25 +26,27 @@ form{
 svg.noteAdd:hover{
     color: rgb(28, 63, 219) !important; 
 }
-svg.noteDelete:hover{
-    color: red;
-}
 svg:active{
     transform: scale(1.1);
 }
 .todoItem{
     font-size: 25px;
-    padding-left: 10px;
+    padding: 10px;
 }
-
 .todo{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
 }
 
 .todo>div{
     flex: auto;
+    width: 500px;
+    word-wrap: break-word;
+    transition: all 0.8s;
 }
 .todo>span{
     align-self: flex-start;
@@ -52,12 +55,34 @@ svg:active{
     margin: auto 5px;
 }
 .todo>div>h2{
-    margin: 0px;
+    margin: 5px 0px;
+    font-size: 30px;
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 2rem;
+    letter-spacing: .0125em;
+    text-decoration: inherit;
+    text-transform: inherit;
 }
 .todo>div>p{
-    margin: 0px;
+    margin: 5px 0px;
+    margin-bottom: 0px;
     font-size: 20px;
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: .0178571429em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    opacity: .6;
 }
-.todo:nth-child(even){
-    background-color: #2d2d2d1c;
+form{
+    width: 70%;
+}
+
+
+.MuiFormGroup-root.css-dmmspl-MuiFormGroup-root>* {
+    height: 30px;
 }

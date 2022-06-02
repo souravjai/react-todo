@@ -1,11 +1,27 @@
 import Header from './component/Header'
 import AddNote from './component/AddNote'
 import TodoItem from './component/TodoItem'
+import FilterNotes from './component/FilterNotes'
 import './App.css';
 import React, { useEffect, useState } from 'react';
 
 
 function App() {
+
+  function getDate(){
+    var today = new Date();
+    var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return (date+' '+time);
+  }
+  const [color_index,set_color_index]=useState(0);
+  const colors=["lightblue","lightcoral","lightgreen","lightpink","lightsteelblue","lightskyblue","lightsalmon"];
+  
+  function getRandomColor(){
+    let color=colors[color_index];
+    set_color_index((color_index+1)%colors.length);
+    return color;
+  }
 
   const onDelete=(todo)=>{
     setTodos(todos.filter( e=>{
@@ -14,13 +30,14 @@ function App() {
   }
 
   const addTodo=(title,desc)=>{
-    let sno=todos.at(-1)?todos.at(-1).sno+1:1;
+    
 
     let newTodo={
-      sno,
+      timeStamp:getDate(),
       title,
       desc,
-      completed:false
+      completed:false,
+      color:getRandomColor()
     }
     setTodos([...todos,newTodo]);
   }
@@ -34,13 +51,16 @@ function App() {
     }))
   }
 
+  const onFilter=(filter)=>{
+    setFilter(filter);
+  }
   let initialize=[];
 
   if(localStorage['todos']!==undefined){
     initialize=JSON.parse(localStorage['todos']);
   }
   const [todos, setTodos] = useState(initialize);
-
+  const[currentFilter,setFilter]=useState("1");
   useEffect(()=>{
     localStorage.setItem('todos',JSON.stringify(todos));
   },[todos])
@@ -49,8 +69,14 @@ function App() {
   return (
     <>
     <Header/>
-    <AddNote addTodo={addTodo}/>
-    <TodoItem todos={todos} onDelete={onDelete} onCompleted={onCompleted}/>
+    <div style={{display:"flex",alignItems:"center"}}>
+      <AddNote addTodo={addTodo}/>
+      <FilterNotes  onFilter={onFilter}/>
+    </div>
+    <TodoItem todos={todos.filter(e=>{
+      return (currentFilter==="1" ) || (currentFilter==="2" && e.completed) || (currentFilter==="3" && !e.completed);
+    })} 
+    onDelete={onDelete} onCompleted={onCompleted}/>
     </>
   );
 }
