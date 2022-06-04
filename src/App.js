@@ -29,9 +29,16 @@ function App() {
     }))
   }
 
+  const updateTodo=(new_title,new_desc,todo)=>{
+    setTodos(todos.map(e=>{
+      if(todo===e){
+        e.title=new_title;
+        e.desc=new_desc;
+      }
+      return e;
+    }))
+  }
   const addTodo=(title,desc)=>{
-    
-
     let newTodo={
       timeStamp:getDate(),
       title,
@@ -69,6 +76,7 @@ function App() {
   return (
     <>
     <Header/>
+    <hr></hr>
     <div style={{display:"flex",alignItems:"center"}}>
       <AddNote addTodo={addTodo}/>
       <FilterNotes  onFilter={onFilter}/>
@@ -76,7 +84,7 @@ function App() {
     <TodoItem todos={todos.filter(e=>{
       return (currentFilter==="1" ) || (currentFilter==="2" && e.completed) || (currentFilter==="3" && !e.completed);
     })} 
-    onDelete={onDelete} onCompleted={onCompleted}/>
+    onDelete={onDelete} onCompleted={onCompleted} onUpdate={updateTodo}/>
     </>
   );
 }

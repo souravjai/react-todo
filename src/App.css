@@ -6,6 +6,7 @@ body{
     padding: 20px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;
+    width: 90vw;
 }
 
 header{
@@ -22,13 +23,18 @@ header>span:nth-child(2){
 
 form{
     margin-top: 5px;
+    width: 410px;
 }
+
+
 svg.noteAdd:hover{
     color: rgb(28, 63, 219) !important; 
 }
+
 svg:active{
     transform: scale(1.1);
 }
+
 .todoItem{
     font-size: 25px;
     padding: 10px;
@@ -78,10 +84,6 @@ svg:active{
     text-transform: inherit;
     opacity: .6;
 }
-form{
-    width: 70%;
-}
-
 
 .MuiFormGroup-root.css-dmmspl-MuiFormGroup-root>* {
     height: 30px;

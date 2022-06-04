@@ -14,7 +14,9 @@ export default function TodoItem(props) {
                     className="todo"
                     todo={todo} 
                     onDelete={()=>props.onDelete(todo)}
-                    onCompleted={()=>props.onCompleted(todo)}/> 
+                    onCompleted={()=>props.onCompleted(todo)}
+                    onUpdate={props.onUpdate}
+                    /> 
                     );
                     })
             }

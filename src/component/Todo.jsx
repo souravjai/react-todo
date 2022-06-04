@@ -5,20 +5,23 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import NoteTextField from './NoteTextField';
 
-export default function Todo({ todo, onDelete, onCompleted }) {
+export default function Todo({ todo, onDelete, onCompleted,onUpdate }) {
 
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleUpdate=(title,desc)=>{
+        handleClose();
+        onUpdate(title,desc,todo);
+    }
 
     return (
         <div className="todo"
@@ -46,18 +49,11 @@ export default function Todo({ todo, onDelete, onCompleted }) {
             <Dialog open={open} onClose={handleClose} >
                 <DialogTitle style={{width:"500px"}}>Edit Note</DialogTitle>
                 <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        value={todo.title}
-                        fullWidth
-                        variant="standard"
-                    />
+                    <NoteTextField form_id="update-todo-form" title={todo.title} desc={todo.desc} handleSubmit={handleUpdate}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Update</Button>
+                    <Button  form="update-todo-form" type="submit" >Update</Button>
                 </DialogActions>
             </Dialog>
 
