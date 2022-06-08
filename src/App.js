@@ -1,4 +1,5 @@
 import Header from './component/Header'
+import Footer from './component/Footer'
 import AddNote from './component/AddNote'
 import TodoItem from './component/TodoItem'
 import FilterNotes from './component/FilterNotes'
@@ -46,7 +47,7 @@ function App() {
       completed:false,
       color:getRandomColor()
     }
-    setTodos([...todos,newTodo]);
+    setTodos([newTodo,...todos]);
   }
   
   const onCompleted=(todo)=>{
@@ -63,9 +64,42 @@ function App() {
   }
   let initialize=[];
 
-  if(localStorage['todos']!==undefined){
+  if(localStorage['todos']!==undefined && localStorage['todos'].length>2){
     initialize=JSON.parse(localStorage['todos']);
   }
+  else{
+    initialize=[
+      {
+        timeStamp:getDate(),
+        title:"Hello World!",
+        desc:"how you doin'?",
+        completed:false,
+        color:"lightblue"
+      },
+      {
+        timeStamp:getDate(),
+        title:"This is completed!",
+        desc:"To undo this click on the left checkbox",
+        completed:true,
+        color:"lightgrey"
+      },
+      {
+        timeStamp:getDate(),
+        title:"Start Hovering",
+        desc:"Hover over notes to see its creation date",
+        completed:false,
+        color:"lightpink"
+      },
+      {
+        timeStamp:getDate(),
+        title:"You are good to go!",
+        desc:"Delete these notes to get started!",
+        completed:false,
+        color:"lightsalmon"
+      }
+    ]
+  }
+
   const [todos, setTodos] = useState(initialize);
   const[currentFilter,setFilter]=useState("1");
   useEffect(()=>{
@@ -76,7 +110,7 @@ function App() {
   return (
     <>
     <Header/>
-    <hr></hr>
+    
     <div style={{display:"flex",alignItems:"center"}}>
       <AddNote addTodo={addTodo}/>
       <FilterNotes  onFilter={onFilter}/>
@@ -85,6 +119,8 @@ function App() {
       return (currentFilter==="1" ) || (currentFilter==="2" && e.completed) || (currentFilter==="3" && !e.completed);
     })} 
     onDelete={onDelete} onCompleted={onCompleted} onUpdate={updateTodo}/>
+
+    <Footer/>
     </>
   );
 }

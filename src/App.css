@@ -88,3 +88,15 @@ svg:active{
 .MuiFormGroup-root.css-dmmspl-MuiFormGroup-root>* {
     height: 30px;
 }
+
+.filter{
+    margin: auto;
+}
+
+.footer {
+    position: sticky;
+    bottom: 10px;
+    left:10px;
+    padding-left: 90%;
+    /* background-color: red; */
+}

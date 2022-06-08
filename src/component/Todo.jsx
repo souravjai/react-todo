@@ -15,7 +15,7 @@ export default function Todo({ todo, onDelete, onCompleted,onUpdate }) {
                 { padding: "20px", background: todo.color, borderRadius: "20px" }}>
 
             
-            <CheckboxNote todo={todo} onCompleted={onCompleted}/>
+            <CheckboxNote completed={todo.completed} onCompleted={onCompleted}/>
             <NoteTitle todo={todo}/>
             <EditNote onUpdate={onUpdate} todo={todo}/>
             <DeleteNote onDelete={onDelete}/>
