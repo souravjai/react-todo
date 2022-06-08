@@ -15,9 +15,9 @@ function App() {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     return (date+' '+time);
   }
+
   const [color_index,set_color_index]=useState(0);
   const colors=["lightblue","lightcoral","lightgreen","lightpink","lightsteelblue","lightskyblue","lightsalmon"];
-  
   function getRandomColor(){
     let color=colors[color_index];
     set_color_index((color_index+1)%colors.length);
@@ -62,49 +62,27 @@ function App() {
   const onFilter=(filter)=>{
     setFilter(filter);
   }
-  let initialize=[];
 
-  if(localStorage['todos']!==undefined && localStorage['todos'].length>2){
-    initialize=JSON.parse(localStorage['todos']);
-  }
-  else{
-    initialize=[
-      {
-        timeStamp:getDate(),
-        title:"Hello World!",
-        desc:"how you doin'?",
-        completed:false,
-        color:"lightblue"
-      },
-      {
-        timeStamp:getDate(),
-        title:"This is completed!",
-        desc:"To undo this click on the left checkbox",
-        completed:true,
-        color:"lightgrey"
-      },
-      {
-        timeStamp:getDate(),
-        title:"Start Hovering",
-        desc:"Hover over notes to see its creation date",
-        completed:false,
-        color:"lightpink"
-      },
-      {
-        timeStamp:getDate(),
-        title:"You are good to go!",
-        desc:"Delete these notes to get started!",
-        completed:false,
-        color:"lightsalmon"
-      }
-    ]
+
+  const init_message=()=>{
+    if(localStorage['todos']!==undefined && localStorage['todos'].length>2){
+      return JSON.parse(localStorage['todos']);
+    }
+    return [
+    {timeStamp:"Author Note 1",title:"Hello World!",desc:"how you doin'?",completed:false,color:"lightblue"},
+    {timeStamp:"Author Note 2",title:"This is completed!",desc:"To undo this click on the left checkbox",completed:true,color:"lightgrey"},
+    {timeStamp:getDate(),title:"Start Hovering",desc:"Hover over notes to see its creation date",completed:false,color:"lightpink"},
+    {timeStamp:"Author Note 3",title:"Reload/Close page without worrying",desc:"Your todos are saved and safe with us",completed:false,color:"lightgreen"},
+    {timeStamp:"Author Note 4",title:"You are good to go!",desc:"Delete these notes to get started!",completed:false,color:"lightsalmon"}
+    ];
   }
 
-  const [todos, setTodos] = useState(initialize);
+  const [todos, setTodos] = useState(()=>init_message());
   const[currentFilter,setFilter]=useState("1");
   useEffect(()=>{
     localStorage.setItem('todos',JSON.stringify(todos));
   },[todos])
+
 
 
   return (
